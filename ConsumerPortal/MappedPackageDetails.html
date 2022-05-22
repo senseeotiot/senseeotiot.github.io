@@ -1,0 +1,86 @@
+{% extends 'ConsumerPortal/index.html' %}
+{% load static %}
+{% load consumer_portal_filters %}
+
+<!-- Block TITLE -->
+
+{% block title %}
+    Packs
+{% endblock %}
+
+<!-- END block TITLE-->
+
+<!-- Block EXTRA STYLE SHEET -->
+
+{% block extrastylesheet %}
+    <style>
+
+    </style>
+{% endblock %}
+
+<!-- END block EXTRA STYLE SHEET-->
+
+{% block banner %}
+
+{% endblock %}
+
+<!-- Block CONTENT -->
+
+{% block content %}
+    <h1 class="display-details-on-mobile" style="background: linear-gradient(to right, #fff, #eb8954 ,#EB5E20)">&nbsp;</h1>
+    <div class="row justify-content-center my-3">
+        <div class="col-sm-1 col-md-1 col-lg-1"></div>
+        <div class="col-sm-10 col-md-10 col-lg-10 row">
+            <div class="col-sm-12 col-md-12 col-lg-12 container-fluid bg-light row justify-content-center p-5">
+                <div class="col-sm-12 col-md-12 col-lg-12 text-center"><h1 class="font-weight-bold dish-text-color-gradient">{{ mapped_pack_details.name }}</h1></div>
+    {#            <div>{{ mapped_pack_details.description }}</div>#}
+                <div class="col-sm-12 col-md-12 col-lg-12 text-center"><h5>{{ mapped_pack_details.channel.all|length }} Channels & service</h5></div>
+                <div class="col-sm-12 col-md-12 col-lg-12 text-center"><h2 ><span class="glow">&#8377;&nbsp;{{ mapped_pack_details.price }}</span> per month</h2></div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 my-5">
+                <div class="card border-0">
+                    {% for i in  mapped_pack_details.channel.all|group_by_channelgenre_from_packages %}
+                        <div class="card-header border-0 bg-white" id="headingOne">
+                                    <h6>{{ i.genre_name|lower|capfirst }}</h6><hr>
+                        </div>
+                        <div class="container">
+                            <div class="card-body row justify-content-start">
+                                {% for logo, name in i.zippedlogosANDnames %}
+                                    <div class="card shadow col-sm-2 col-md-2 col-lg-2 mx-1 my-2" style="min-width: 24%;">
+                                        <div class="card-body text-center">
+                                            <img src="{{ logo }}" alt="img" class="img-fluid"> <br> {{ name }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% comment %}{% for i in  mapped_pack_details.channel.all|group_by_channelgenre %}
+                    {{ i.genre_name }}<br>
+                    <div class="row justify-content-start">
+                    {% for logo, name in i.zippedlogosANDnames %}
+                        <div class="col-2">
+                            <img src="{{ logo }}" alt="img" class="img-fluid"> <br> {{ name }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <br>
+                {% endfor %}{% endcomment %}
+            </div>
+        </div>
+        <div class="col-sm-1 col-md-1 col-lg-1"></div>
+    </div>
+
+{% endblock %}
+<!-- END block CONTENT-->
+
+
+<!-- Block EXTRA SCRIPT -->
+
+{% block extrascript %}
+    <script>
+
+    </script>
+{% endblock %}
+<!-- END block EXTRA SCRIPT-->

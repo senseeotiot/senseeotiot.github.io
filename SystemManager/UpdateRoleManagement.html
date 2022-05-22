@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load rest_framework %}
+{% load static %}
+{% block title %}
+    SENSEEOT | {{ user.username | capfirst }}'s Profile
+{% endblock %}
+<style>
+
+</style>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% if account_details|length > 1 %}
+            <div class="card col-lg-3 col-md-3 col-sm-3">
+                <div class="card-body">
+                    <div class="table-responsive" style="overflow-y: auto; max-height: 300px">
+                        <table class="table table-hover" style="height: 100px">
+                            <tbody>
+                                {% for account_detail in account_details %}
+                                        {% if account_detail == account %}
+                                            <tr>
+                                                <td class="font-weight-bold">{{ account_detail.user }}</td>
+                                                <td class="font-weight-bold">{{ account_detail.get_role_display }}</td>
+                                            </tr>
+                                        {% else %}
+                                            <tr style="cursor: pointer" onclick=window.location='{% url "edit_role_management" account_detail.pk %}' >
+                                                <td>
+                                                    {{ account_detail.user }}
+                                                </td>
+                                                <td>
+                                                    {{ account_detail.get_role_display }}
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+            {% else %}
+                <div class="col-lg-3 col-md-3 col-sm-3"></div>
+            {% endif %}
+            <div class="card col-lg-6 col-md-6 col-sm-6">
+                <form method="post">
+                {% csrf_token %}
+{#                <div class="card-header text-center" style="cursor: pointer; background-image:linear-gradient(to right, #EB5E20, #ff8c2b)">#}
+{#                        <img src="{% static 'img/steve2.png' %}" style="width: 120px" alt="img"/>#}
+{#                        <h5 class="font-weight-bold" style="color: #FFFFFF">{{ user.username }}</h5>#}
+{#                    </div>#}
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 text-center pb-2 pt-2" style="background-image:linear-gradient(to right, #EB5E20, #ff8c2b)">
+                                <img src="{% static 'img/steve2.png' %}" style="width: 120px" alt="img"/><br>
+                                <b>{{ account | capfirst }}</b>
+                            </div>
+                            <div class="col-lg-12 pt-3">
+                                {% include 'form.html' %}
+                            </div>
+                        </div>
+                        <input type="hidden" name="hidden_id" value="{{ account.pk }}" />
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" value="Submit" class="btn btn-block font-weight-bold" style="color: white; background-image:linear-gradient(to right, #EB5E20, #ff8c2b)">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3"></div>
+        </div>
+    </div>
+
+
+{% endblock %}

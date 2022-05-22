@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load string_filters %}
+{% block title %}
+    SENSEEOT | Channel Management
+{% endblock %}
+{% block content %}
+{% block extrastylesheet %}
+<style>
+
+</style>
+{% endblock %}
+<div role="tabpanel" aria-labelledby="users-tab">
+    {% if not account_detail is None and not account_detail.role == '0' %}
+        <a href="#"><button class="btn btn-md btn-primary font-weight-bold">
+            <span><i class="fas fa-plus-circle"></i></span>&nbsp; Add Device</button></a>
+    {% endif %}
+        <div class="row">
+            <div class="col-lg-12">
+                {% if device_details %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead style="background-image:linear-gradient(to right, #0062cc, #5372ff); color: white">
+                                    <tr>
+                                        <th class="font-weight-bold">Box ID</th>
+                                        <th class="font-weight-bold">Date of Manufacture</th>
+                                        <th class="font-weight-bold">Operator</th>
+                                        <th class="font-weight-bold">Model</th>
+                                        <th class="font-weight-bold">CAS</th>
+                                        <th class="font-weight-bold">MAC</th>
+                                        <th class="font-weight-bold">Chip ID</th>
+                                        <th class="font-weight-bold">Factory</th>
+                                        <th class="font-weight-bold">Batch ID</th>
+                                        <th class="font-weight-bold">PCP Version</th>
+                                        <th class="font-weight-bold">Software Version</th>
+                                        <th class="font-weight-bold">Hardware Version</th>
+                                        {% if account_detail.role == '2' %}
+                                            <th class="font-weight-bold">Edit</th>
+                                            <th class="font-weight-bold">Delete</th>
+                                        {% endif %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                       {% for device_detail in device_details %}
+                                        <tr>
+                                            <td>{{ device_detail.box_id }}</td>
+                                            <td>{{ device_detail.mfg_date }}</td>
+                                            <td>
+                                                {{ device_detail.operator }}
+                                                <span class="text-muted" data-toggle="tooltip" data-placement="top" data-html="true" title="{{ device_detail.operator|class_to_string }}" style="cursor: pointer">
+                                                    ...more
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {{ device_detail.model }}
+                                                <span class="text-muted" data-toggle="tooltip" data-placement="top" data-html="true" title="{{ device_detail.model|class_to_string }}" style="cursor: pointer">
+                                                    ...more
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {{ device_detail.cas }}
+                                                <span class="text-muted" data-toggle="tooltip" data-placement="top" data-html="true" title="{{ device_detail.cas|class_to_string }}" style="cursor: pointer">
+                                                    ...more
+                                                </span>
+                                            </td>
+                                            <td>{{ device_detail.mac }}</td>
+                                            <td>{{ device_detail.chip_id }}</td>
+                                            <td>
+                                                {{ device_detail.factory }}
+                                                <span class="text-muted" data-toggle="tooltip" data-placement="top" data-html="true" title="{{ device_detail.factory|class_to_string }}" style="cursor: pointer">
+                                                    ...more
+                                                </span>
+                                            </td>
+                                            <td>{{ device_detail.batch_id }}</td>
+                                            <td>{{ device_detail.pcb_version }}</td>
+                                            <td>{{ device_detail.software_version }}</td>
+                                            <td>{{ device_detail.hardware_version }}</td>
+                                            {% if not account_detail is None and not account_detail.role == '0' %}
+                                                <td>
+                                                    <a href="{% url 'edit_device_list' device_detail.pk %}">
+                                                        <button class="btn btn-sm btn-block" style="background-color: #EB5E20; color: #FFFFFF">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-block" data-toggle="modal" data-target="#devicedelete{{ device_detail.pk }}" style="background-color: #EB5E20; color: #FFFFFF">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </td>
+                                                <div class="modal fade right" id="devicedelete{{ device_detail.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 99999">
+                                                    <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+                                                    <div class="modal-dialog modal-side modal-top-right" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h6 class="modal-title w-100" id="myModalLabel">Are you sure want to delete {{ device_detail.box_id }}?</h6>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="btn-group">
+                                                                    <a href="#" type="button" class="btn btn-md" data-dismiss="modal" style="color: #FFFFFF; background-color: #EB5E20"><b>Cancel</b></a>
+                                                                    &nbsp;&nbsp;&nbsp;
+                                                                    <form method="POST" action="{% url "delete_device_list" device_detail.pk%}?page={{ page }}">
+                                                                        {% csrf_token %}
+                                                                        <button type="submit" class="btn btn-md font-weight-bold" style="color: #FFFFFF; background-color: #00428a">Delete</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer col-lg-12">
+                            {% include 'paginator.html' %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning font-weight-bold text-uppercase my-1">
+                        No records found.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+{% endblock  %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load rest_framework %}
+{% load static %}
+{% block title %}
+    SENSEEOT || Register
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center logo my-4">
+              <a href="{% url 'home' %}"><img class="logo-responsive" src="{% static 'img/Logo New-with-text.png' %}" width="20%" alt="logo"></a>
+        </h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Register</h3>
+
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                                {% include 'serializer_form.html' %}
+                            <button type="submit" class="btn btn-block" style="color: #FFFFFF; background-color: #EB5E20"><b>Sign up</b></button>
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        Already have an account? <a href="{% url 'LoginTemplate' %}" style="color: #EB5E20">Login</a>
+                    </div>
+                </div>
+                <div class="text-center py-2">
+                    <small>
+                        <a href="#" class="text-muted">Forgot your password?</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    {% for message in messages %}#}
+{#    {{ message }}#}
+{#    {% endfor %}#}
+
+{% endblock %}
+
+
+
+
+
+
+

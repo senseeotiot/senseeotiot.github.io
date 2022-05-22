@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load string_filters %}
+{% block title %}
+    SENSEEOT | Channel Management
+{% endblock %}
+{% block content %}
+
+<div role="tabpanel" aria-labelledby="users-tab">
+    {% if not account_detail is None and not account_detail.role == '0' %}
+            <a href="#"><button class="btn btn-md btn-primary font-weight-bold">
+                <i class="fas fa-plus-circle"></i>&nbsp;Add Programs
+            </button></a>
+    {% endif %}
+        <div class="row">
+            <div class="col-lg-12">
+                {% if program_details %}
+                    <div class="card">
+                        <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead style="background-image:linear-gradient(to right, #0062cc, #5372ff); color: white">
+                                <tr>
+                                    <th class="font-weight-bold">Date</th>
+                                    <th class="font-weight-bold">Title</th>
+                                    <th class="font-weight-bold">Start time</th>
+                                    <th class="font-weight-bold">End time</th>
+                                    <th class="font-weight-bold">Description</th>
+                                    <th class="font-weight-bold">Program</th>
+                                    <th class="font-weight-bold">Poster</th>
+                                    <th class="font-weight-bold">Episode number</th>
+                                    <th class="font-weight-bold">Subtitle</th>
+                                    <th class="font-weight-bold">Subgenre</th>
+                                    <th class="font-weight-bold">Channel</th>
+                                    <th class="font-weight-bold">Score</th>
+                                    <th class="font-weight-bold">Dubbed language id</th>
+                                    <th class="font-weight-bold">Series number</th>
+                                    <th class="font-weight-bold">Duration (mins)</th>
+                                    <th class="font-weight-bold">Favourite</th>
+                                    <th class="font-weight-bold">Recommended</th>
+                                    <th class="font-weight-bold">Credits</th>
+{#                                        {% if account_detail.role == '2' %}#}
+{#                                            <th class="font-weight-bold">Delete</th>#}
+{#                                        {% endif %}#}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for program_detail in program_details %}
+                                    <tr>
+                                        <td>{{ program_detail.date | date:"SHORT_DATE_FORMAT"}}<br>
+                                            {{ program_detail.date | time:"h:i a"}}
+                                        </td>
+                                        <td>{{ program_detail.title }}</td>
+                                        <td>{{ program_detail.start_time | date:"SHORT_DATE_FORMAT"}}<br>
+                                            {{ program_detail.start_time | time:"h:i a"}}
+                                        </td>
+                                        <td>{{ program_detail.end_time | date:"SHORT_DATE_FORMAT"}}<br>
+                                            {{ program_detail.end_time | time:"h:i a"}}
+                                        </td>
+                                        <td>{{ program_detail.description|string_slicing}}
+                                            <span class="text-muted" data-toggle="tooltip" data-placement="top" data-html="true" title="{{ program_detail.description }}" style="cursor: pointer">
+                                                ...more
+                                            </span>
+                                        </td>
+                                        <td data-toggle="tooltip" data-html="true" data-placement="top" title="<img src='{{ program_detail.programmeurl }}' alt='{{ program_detail.programmeurl }}' width=80% />">
+                                            <img src="{{ program_detail.programmeurl }}" alt="{{ program_detail.programmeurl }}" width="99%"/>
+                                        </td>
+                                        <td>
+                                            {% if program_detail.poster_url %}
+                                                <img src="{{ program_detail.poster_url }}" alt="{{ program_detail.poster_url }}" width="99%"/>
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ program_detail.episode_num }}</td>
+                                        <td>
+                                            {% if program_detail.sub_title %}
+                                                {{ sub_title }}
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ program_detail.sub_genre }}</td>
+                                        <td>{{ program_detail.channel }}</td>
+                                        <td>{{ program_detail.score }}</td>
+                                        <td>{{ program_detail.dubbedlanguage_id }}</td>
+                                        <td>
+                                            {% if program_detail.series_number %}
+                                                {{ series_number }}
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ program_detail.duration }}</td>
+                                        <td>
+                                            {% if program_detail.favourite %}
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            {% else %}
+                                                <i class="fas fa-times-circle text-danger"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if program_detail.recommended %}
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            {% else %}
+                                                <i class="fas fa-times-circle text-danger"></i>
+                                            {% endif %}
+                                        </td>
+                                        <td class="position-sticky">
+                                            {% with program_detail.credits|jsonify as actors %}
+                                                {% for actor in actors.actor %}
+                                                    {% if not actor == ''%}
+                                                        {% if forloop.counter < 2 %}
+                                                            {{ actor }}&nbsp;-&nbsp;
+                                                        {% endif %}
+                                                        {% if forloop.counter == 2 %}
+                                                            <span class="text-muted" data-toggle="tooltip" data-placement="top" data-html="true" title="{{ actors.actor|list_to_string }}">
+                                                                ...more
+                                                            </span>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        <span class="text-muted">Information not found</span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endwith %}
+                                        </td>
+{% comment %}
+                                            <td>
+                                            {% if channel_detail.logo_url %}
+                                                {{ channel_detail.logo_url }}
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                            </td>
+                                            {% if account_detail.role == '2' %}
+                                            <td></td>
+                                            {% endif %}
+{% endcomment %}
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                        <div class="card-footer col-lg-12">
+                        {% include 'paginator.html' %}
+                    </div>
+                </div>
+                {% else %}
+                    <div class="alert alert-warning font-weight-bold text-uppercase my-1">
+                        No records found.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+{% endblock  %}

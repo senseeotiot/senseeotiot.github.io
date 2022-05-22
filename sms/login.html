@@ -1,0 +1,49 @@
+{% extends 'ConsumerPortal/index.html' %}
+{% load rest_framework %}
+{% load static %}
+{% block title %}
+    SENSEEOT || Login
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block extrastylesheet %}
+    <style>
+        {% comment %}body {
+            background-image: url("/static/img/b.png");
+        }{% endcomment %}
+
+    </style>
+{% endblock %}
+{% block navigation %}{% endblock %}
+{% block banner %}{% endblock %}
+{% block content %}
+    <div class="container" style="min-height: 493px">
+        <h1 class="text-center logo my-4">
+            <a href="{% url 'home' %}"><img class="logo-responsive" src="{% static 'img/Logo New-with-text.png' %}" alt="senseeot"></a>
+        </h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Log in</h3>
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            {% include 'serializer_form.html' %}
+                            <button type="submit" class="btn btn-block" style="color: #ffffff; background-color: #0b6bd3"><b>Log in</b></button>
+                        </form>
+
+                    </div>
+                    {#                    <div class="card-footer text-muted text-center">#}
+                    {#                        Not registered? <a href="{% url 'account_register' %}" style="color: #EB5E20;">Sign up</a>#}
+                    {#                    </div>#}
+                </div>
+                <div class="text-center py-2">
+                    <small>
+                        <a href="{% url 'reset_password_send_url' %}" class="text-muted">Forgot your password?</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

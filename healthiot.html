@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banner %}
+
+
+
+
+    <!-- #intro -->
+<!--==========================
+    Intro Section
+  ============================-->
+       <section id="intro" class="clearfix">
+        <div class="intro-img my-n5">
+            <div style="background-image: url({% static 'img/ctv.jpg' %}); background-size: cover;">
+            <div class="container row justify-content-center">
+                <div class="col-lg-12 my-5 text-white text-center">
+                    <h3 class="font-weight-bold"></h3>
+                </div>
+
+                <div class="col-lg-12 pb-5 text-center">
+                    <div class=" row justify-content-center">
+                         <div class="col-lg-6">
+                            <img src="{% static 'img/ocs.jpeg' %}" alt="" class="img-fluid" style="width: 400px; height: 400px"/>
+                        </div>
+                       
+                     
+                         <div class="col-lg-6">
+                            <img src="{% static 'img/vs.png' %}" alt="" class="img-fluid" style="width: 400px; height: 400px"/>
+                        </div>
+                       
+                        
+                    </div>
+                </div>
+            </div>  
+        </div>
+        </div>
+    </section>
+    {% endblock %}
+    
+{% block content %}
+    <div class="container motto pb-3">
+        <div class="row justify-content-around">
+            <div class=" col-12 ">
+              <h2><font color="DarkBlue">Healthcare IoT Solutions </font></h2>
+            </div>
+            <div class="card shadow my-3 row" style="width: 22rem;">
+                <div class="col-12 card-body text-white" style="background-color: #87CEEB;">
+                    <h5 class="font-weight-bold text-center">
+                        <i class="fa-2x my-2"></i><br>
+                        Apps 
+                    </h5>
+                </div>
+                <div class="col-12 card-body font-weight-bold" style="color: rgba(42, 71, 86, .6); height: 10rem">
+                    Android, iOS, Web and STB Patient App, Doctor App, Hospital App.
+                </div>
+            </div>
+            <div class="card shadow my-3 row" style="width: 22rem;">
+                <div class="col-12 card-body text-white" style="background-color: #7CFC00">
+                    <h5 class="font-weight-bold text-center">
+                        <i class="fa-2x my-2"></i><br>
+                        Home Health Monitoring
+                    </h5>
+                </div>
+                <div class="col-12 card-body font-weight-bold" style="color: rgba(42, 71, 86, .6); height: 10rem">
+                    Blood Pressure (BP), Temperature, Heart Rate(HR), SPO2(Oxygen Saturation) etc.
+                </div>
+            </div>
+            <div class="card shadow my-3 row" style="width: 22rem;">
+                <div class="col-12 card-body text-white" style="background-color: #8B008B">
+                    <h5 class="font-weight-bold text-center">
+                        <i class="fa-2x my-2"></i><br>
+                        e-Health
+                    </h5>
+                </div>
+                <div class="col-12 card-body font-weight-bold" style="color: rgba(42, 71, 86, .6); height: 10rem">
+                    Digital prescription, HL7, EHR (Electronic Health Record) etc.
+                </div>
+            </div>
+        </div>
+    </div>
+ <section id="intro" class="clearfix">
+
+    <div class="container row justify-content-center">
+    <div class="col-lg-5 my-5">
+   <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="560.7" height="315" type="text/html" src="https://www.youtube.com/embed/jLPwTmZE8q0?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"></iframe>
+    </div>
+    <div class="col-lg-2 my-2">
+    </div>
+    <div class="col-lg-5 my-5">
+    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="560.7" height="315" type="text/html" src="https://www.youtube.com/embed/0diO_ncnpNs?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"></iframe>
+    </div>
+    </div>
+     
+   
+    </section>
+
+{% endblock %}

@@ -1,0 +1,647 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Senseeot |{% block title %} Subscriber{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link href="{% static 'img/Logo New-with-text.png' %}" rel="icon">
+        <!-- Font Awesome -->
+        {#      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">#}
+        <!-- Font Awesome -->
+
+        {#      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">#}
+        {% block stylesheet %}
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/open-iconic-bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/animate.css' %}">
+
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/owl.theme.default.min.css' %}">
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/magnific-popup.css' %}">
+
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/aos.css' %}">
+
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/ionicons.min.css' %}">
+
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/bootstrap-datepicker.css' %}">
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/jquery.timepicker.css' %}">
+
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/flaticon.css' %}">
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/icomoon.css' %}">
+            <link rel="stylesheet" href="{% static 'consumer_portal/css/style.css' %}">
+            <style>
+
+            </style>
+        {% endblock %}
+        {% block extrastylesheet %}
+            <style>
+                .modal.right.fade .modal-dialog {
+                    right: -320px;
+                    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+                    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+                    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+                    transition: opacity 0.3s linear, right 0.3s ease-out;
+                }
+                .modal.right.fade.in .modal-dialog {
+                    right: 0;
+                }
+                .bg-banner1{
+                    background-image: url("{% static 'consumer_portal/images/world.jpeg' %}");
+                }
+            </style>
+        {% endblock %}
+    </head>
+    <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+    {% block navigation %}
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
+            <div class="container">
+                <div class="col-1">
+                    <a class="navbar-brand collapse navbar-collapse text-dark" href="#"><img class="img-fluid logo-responsive" src="{% static 'img/Logo New-with-text.png' %}" alt="Senseeot"/>{% comment %}SENSEEOT{% endcomment %}</a>
+                </div>
+                <a class="navbar-toggler" href="https://www.senseeot.com/"><img class="img-fluid logo-responsive1" src="{% static 'img/Logo New-with-text.png' %}" alt="senseeot"/></a>
+                <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav nav ml-auto">
+                        <li class="nav-item"><a href="{% url 'IoT_home' %}" class="nav-link font-weight-bold {% url 'IoT_home' as current_url1 %} {% if request.path == current_url1 %} active {% endif %}"><span>Home</span></a></li>
+                       
+                       
+                        <li class="nav-item submenu dropdown">
+                            <a href="#explore" class="nav-link font-weight-bold" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>Explore</span></a>
+                            <ul class="dropdown-menu border-top-0 p-3">
+                                <li class="nav-item"><a class="nav-link text-primary" href="#set-top-boxes">Set top boxes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item submenu dropdown">
+                            <a href="#orders" class="nav-link font-weight-bold" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>Orders</span></a>
+                            <ul class="dropdown-menu dropdown-menu-width border-top-0 p-3">
+                                <li class="nav-item"><a class="nav-link text-primary" href="#senseeot">Get new connection</a></li>
+                                <li class="nav-item"><a class="nav-link text-primary" href="#senseeot">Corporate offers</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="#consumer-corner" class="nav-link font-weight-bold"><span>Consumer Corner</span></a></li>
+                        <li class="nav-item"><a href="#contact-section" class="nav-link font-weight-bold"><span>Contact us</span></a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a href="{% url 'LogoutTemplate' %}?is_staff=false" class="nav-link font-weight-bold"><span>Logout &nbsp;<i class="fas fa-power-off"></i></span></a></li>
+                        {% else %}
+                            <li class="nav-item submenu dropdown">
+                                <a href="#my-account" class="nav-link font-weight-bold" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span>My Account</span>
+                                </a>
+                                <ul class="dropdown-menu border-top-0 p-3">
+                                <li class="nav-item"><a class="nav-link text-primary" href="{% url 'consumer_portal:login' %}">Login</a></li>
+                                <li class="nav-item"><a class="nav-link text-primary" href="{% url 'consumer_portal:signupForm' %}">Signup</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+    {#	          <li class="nav-item cta"><a href="#" class="nav-link" data-toggle="modal" data-target="#modalAppointment">My Account</a></li>#}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block banner %}
+    <section id="home" class="hero-wrap js-fullheight bg-banner" data-section="home">
+      <div class="inner"></div>
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+            <div class="col-sm-5 col-md-5 col-lg-5 display-details-on-tablet ml-n5"><img src="{% static 'consumer_portal/images/family.jpg' %}" alt="" width="80%"></div>
+            <div class="col-sm-1 col-md-1 col-lg-1 display-details-on-tablet"></div>
+            <div class="col-sm-6 col-md-4 col-lg-4 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-4 bg-banner-text-padder" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" {% comment %}style="color: #EB5E20"{% endcomment %}>Watch When You Want</h1>
+            
+            <p><a href="#" class="btn btn-danger py-3 px-4" data-toggle="modal" data-target="#">Watch Live TV</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endblock %}
+    {% block content %}
+
+
+
+    
+    {% comment %}<section class="ftco-about ftco-no-pt ftco-no-pb img ftco-section bg-light" id="about-section">
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-6 col-lg-6 d-flex order-md-last">
+                <div class="img-about img d-flex align-items-stretch">
+                    <div class="img d-flex align-self-stretch align-items-end" style="background-image:url({% static 'consumer_portal/images/dish_ott1.png' %}); background-size: contain;">
+    {#	    					<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center mr-3">#}
+    {#	    						<span class="ion-ios-play play mr-2"></span>#}
+    {#	    						<span class="watch">Watch Video</span>#}
+    {#	    					</a>#}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 pr-lg-5 py-3 py-lg-5">
+                <div class="row justify-content-start py-3 py-lg-5">
+              <div class="col-md-12 heading-section ftco-animate">
+                <span class="subheading"></span>
+                <h2 class="mb-4" style="font-size: 44px; text-transform: capitalize;">Welcome to Senseeeot OTT</h2>
+                <p>Seamless integration of Linerar, VOD and OTT Content</p>
+
+              </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </section>{% endcomment %}
+
+    <section class="ftco-about ftco-no-pt ftco-no-pb img ftco-section bg-light my-5">
+    
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-6 col-lg-6 pl-lg-5 py-5">
+                <div class="row justify-content-start pb-3">
+                    <div class="col-md-12 heading-section ftco-animate pb-5">
+                        <span class="subheading"></span>
+                        <h2 class="mb-4" style="font-size: 44px; text-transform: capitalize;">Linux OTT</h2>
+                    </div>
+                    <div class="col-md-12 testimony-section">
+                        <div class="owl-carousel carousel-testimony">
+                            <div class="item">
+                                <div class="testimony-wrap">
+                                    <div class="text mb-5">
+                                        <div class="icon">
+                                            <span class="icon-quote-left"></span>
+                                        </div>
+                                        <p>DVB, IPTV and OTT on Linux</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="user-img img mr-3 icon-color mr-4">
+                                            <span class="fas fa-eye fa-4x"></span>
+                                        </div>
+                                        <div>
+                                            <p class="name mb-0">Ultra HD, 4K</p>
+                                            <span class="position">HDR, 3D</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="testimony-wrap">
+                                    <div class="text mb-5">
+                                        <div class="icon">
+                                            <span class="icon-quote-left"></span>
+                                        </div>
+                                        <p>Linux , AOSP Implementation</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="user-img img mr-3 icon-color mr-4">
+                                            <span class="fas fa-volume-up fa-4x"></span>
+                                        </div>
+                                        <div>
+                                            <p class="name mb-0">CAS, DRM</p>
+                                            <span class="position">WIDEVINE, PLAYREADY, VERIMATRIX</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="testimony-wrap">
+                                    <div class="text mb-5">
+                                        <div class="icon">
+                                            <span class="icon-quote-left"></span>
+                                        </div>
+                                        <p>Cloud Middleware</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="user-img img mr-3 icon-color">
+                                            <span class="fas fa-palette  fa-4x"></span>
+                                        </div>
+                                        <div>
+                                            <p class="name mb-0">Featues</p>
+                                            <span class="position">EPG, TMS, Ad, Deals</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 d-flex">
+                <div class="img-about img d-flex align-items-stretch">
+                    <div class="img d-flex align-self-stretch align-items-end" style="background-image:url({% static 'img/hybrid-ott.png' %}); background-size: contain;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-6 col-lg-6 d-flex">
+                <div class="img-about img d-flex align-items-stretch">
+                    <div class="img d-flex align-self-stretch align-items-end" style="background-image:url({% static 'img/android.png' %}); background-size: contain;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 pl-lg-5 py-5">
+                <div class="row justify-content-start pb-3">
+              <div class="col-md-12 heading-section ftco-animate pb-5">
+                <span class="subheading"></span>
+                <h2 class="mb-4" style="font-size: 44px; text-transform: capitalize;">SENSEEOT ATV Launcher</h2>
+              </div>
+              <div class="col-md-12 testimony-section">
+                            <div class="owl-carousel carousel-testimony">
+                                <div class="item">
+                                    <div class="testimony-wrap">
+                            <div class="text mb-5">
+                                <div class="icon">
+                                    <span class="icon-quote-left"></span>
+                                </div>
+                                <p>Operator Tier, Voice Enabled</p>
+                            </div>
+                            <div class="d-flex">
+                                <div class="user-img img mr-3 icon-color mr-4">
+                                    <span class="fas fa-eye fa-4x"></span>
+                                </div>
+                                <div>
+                                    <p class="name mb-0">Ultra HD, 4K</p>
+                            <span class="position">HDR. 3D Grphics</span>
+                                </div>
+                            </div>
+                        </div>
+                                </div>
+                                <div class="item">
+                                    <div class="testimony-wrap">
+                            <div class="text mb-5">
+                                <div class="icon">
+                                    <span class="icon-quote-left"></span>
+                                </div>
+                                <p>OTT Apps- Google Playstore</p>
+                            </div>
+                            <div class="d-flex">
+                                <div class="user-img img mr-3 icon-color mr-4">
+                                    <span class="fas fa-volume-up fa-4x"></span>
+                                </div>
+                                <div>
+                                    <p class="name mb-0">Unified Recommedation and Search</p>
+                            <span class="position">Rich metadata</span>
+                                </div>
+                            </div>
+                        </div>
+                                </div>
+                                <div class="item">
+                                    <div class="testimony-wrap">
+                            <div class="text mb-5">
+                                <div class="icon">
+                                    <span class="icon-quote-left"></span>
+                                </div>
+                                <p>Movies- On Demand</p>
+                            </div>
+                            <div class="d-flex">
+                                <div class="user-img img mr-3 icon-color">
+                                    <span class="fas fa-palette  fa-4x"></span>
+                                </div>
+                                <div>
+                                    <p class="name mb-0">Voice Control</p>
+                            <span class="position">Search, Home Auotmation</span>
+                                </div>
+                            </div>
+                        </div>
+                                </div>
+                            </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </section>
+
+    <section class="ftco-section ftco-counter ftco-no-pt ftco-no-pb img" id="section-counter">
+    <div class="container">
+        <div class="row d-md-flex align-items-center justify-content-end">
+            <div class="col-lg-12">
+                <div class="">
+                    <div class="row no-gutters d-md-flex align-items-center align-items-stretch">
+                        <div class="col-md-12 row d-flex justify-content-center bg-light p-4 font-weight-bold ftco-animate">
+                            <div class="col-12 row justify-content-center">
+                                <h3 class="text-muted">Why Senseeot OTT?</h3><br>
+                            </div>
+                            <div class="col-12 row justify-content-center">
+                                Technology offering for Cloud SMS, Consumer App, Ooperator App. Content and Metadata management for rich content experience on multi-screen.
+                            </div>
+                        </div>
+                        <div class="col-12 row justify-content-center">
+                            <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="{% comment %}oi oi-list{% endcomment %} fas fa-list-alt"></span>
+                                        </div>
+                                        {#                                <strong class="number" data-number="50">0</strong>#}
+                                        <strong class="text-uppercase">Cloud EPG
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="fas fa-globe {% comment %}oi oi-browser{% endcomment %}"></span>
+                                        </div>
+                                        {#                                <strong class="number" data-number="10000">0</strong>#}
+                                        <strong class="text-uppercase">tv, gaming, shoping, social tv</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="fas fa-mobile-alt"></span>
+                                        </div>
+                                        {#                                <strong class="number" data-number="564">0</strong>#}
+                                        <strong class="text-uppercase">Smart STB & multi-screen</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18">
+                                    <div class="text">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="fas fa-money-bill-alt {% comment %}oi oi-credit-card{% endcomment %}"></span>
+                                        </div>
+                                        {#                                <strong class="number" data-number="300">0</strong>#}
+                                        <strong class="text-uppercase">Cloud SMS</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+    
+
+
+    <section class="ftco-section contact-section ftco-no-pb bg-light" id="contact-section">
+    <div class="container">
+    <div class="row justify-content-center mb-5 pb-3">
+      <div class="col-md-10 heading-section text-center ftco-animate">
+        <span class="subheading"></span>
+        <h2 class="mb-4">Contact Us</h2>
+        <p>Experience The Entertainment</p>
+      </div>
+    </div>
+    <div class="row d-flex contact-info mb-5">
+      <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+        <div class="align-self-stretch box p-4 text-center">
+            <div class="icon d-flex align-items-center justify-content-center">
+                <span class="icon-map-signs"></span>
+            </div>
+            <h3 class="mb-4">Address</h3>
+            <p>131, SRR Exurbia,
+                Near Alliance University Campus, Anekal,
+                Bangalore- 562106,
+                Karnataka, India</p>
+          </div>
+      </div>
+      <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+        <div class="align-self-stretch box p-4 text-center">
+            <div class="icon d-flex align-items-center justify-content-center">
+                <span class="icon-phone2"></span>
+            </div>
+            <h3 class="mb-4">Contact Number</h3>
+            <p><a href="tel://">+91 7981638671</a></p>
+          </div>
+      </div>
+      <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+        <div class="align-self-stretch box p-4 text-center">
+            <div class="icon d-flex align-items-center justify-content-center">
+                <span class="icon-paper-plane"></span>
+            </div>
+            <h3 class="mb-4">Email Address</h3>
+            <p><a href="mailto:admin@senseeot.com">admin@senseeot.com</a></p>
+          </div>
+      </div>
+      <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+        <div class="align-self-stretch box p-4 text-center">
+            <div class="icon d-flex align-items-center justify-content-center">
+                <span class="icon-globe"></span>
+            </div>
+            <h3 class="mb-4">Website</h3>
+            <p><a href="senseeot.com">senseeot.com</a></p>
+          </div>
+      </div>
+    </div>
+
+    <div class="row no-gutters block-9">
+
+      <div class="col-md-6 order-md-last d-flex" style="z-index: 1">
+
+
+        <form method="post" action="#" class="bg-darken p-5 contact-form" novalidate>
+            {% csrf_token %}
+            {% include 'form.html' %}
+            <input type="submit" value="Send Message" data-toggle="modal" data-target="#QuerySubmit" class="btn btn-outline-secondary py-3 px-5">
+        </form>
+
+        {% comment %}    {% if messages %}
+            <ul>
+                {% for message in messages %}
+                   <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}{% endcomment %}
+
+      </div>
+        <div class="col-md-6 d-flex">
+            <img src="{% static 'consumer_portal/images/cons_1.jpg' %}" alt="question">
+        </div>
+
+{#      <div class="col-md-6 d-flex">#}
+    {#          	<div id="map" class="bg-white"></div>#}
+{#          <img src="{% static 'consumer_portal/images/cons_1.jpg' %}" alt="cons1">#}
+{#      </div>#}
+
+    </div>
+
+
+      <div class="modal fade right" id="QuerySubmit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 99999">
+        <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+        <div class="modal-dialog modal-side modal-top-right" role="document">
+            <div class="alert alert-success">
+              <strong>Success!</strong> Query sent successfully
+            </div>
+        </div>
+    </div>
+    </div>
+    </section>
+    {% endblock %}
+    {% block footer %}
+    <footer class="ftco-footer ftco-section" style="background: linear-gradient(to left, #4e81b6, #5fa3e5, #5fa3e5);">
+    <div class="container">
+    <div class="row justify-content-around mb-5">
+      <div class="col-md-4">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">About <span>Senseeot</span></h2>
+          <p>Experience and Convergence- Linear, IPTV, VOD, OTT</p>
+        </div>
+      </div>
+      {%  url 'consumer_portal:login' as login_url %}
+      {%  url 'consumer_portal:signup' as signup_url %}
+      {%  url 'reset_password_send_url' as send_url %}
+      {% if request.path != login_url and request.path != signup_url  %}
+      <div class="col-md-4">
+        <div class="ftco-footer-widget mb-4 ml-md-4">
+          <h2 class="ftco-heading-2">Links</h2>
+          <ul class="list-unstyled">
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Pack</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Explore</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Orders</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Consumer corner</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact us</a></li>
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+      {% comment %}<div class="col-md">
+         <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Practice Areas</h2>
+          <ul class="list-unstyled">
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Family Law</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Business Law</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Insurance Law</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Criminal Law</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Drug Offenses</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Property Law</a></li>
+            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Employment Law</a></li>
+          </ul>
+        </div>
+      </div>{% endcomment %}
+      <div class="col-md-4">
+        <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Have a Questions?</h2>
+            <div class="block-23 mb-0">
+              <ul>
+                <li><span class="icon icon-map-marker"></span><span class="text">131, SRR Exurbia,Near Alliance University Campus,Anekal,                    Bangalore- 562106,Karnataka, India</span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 7981638671</span></a></li>
+                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">admin@senseeot.com</span></a></li>
+              </ul>
+            </div>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-4">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+
+        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;Senseeot &nbsp<script>document.write(new Date().getFullYear());</script>
+            All rights reserved {% comment %}| This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by
+            <a href="#" target="_blank"></a>{% endcomment %}
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+      </div>
+    </div>
+    </div>
+    </footer>
+    {% endblock %}
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"></circle>
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"></circle>
+    </svg>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAppointmentLabel">Appointment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <div class="form-group">
+            <label for="appointment_name" class="text-black">Full Name</label>
+            <input type="text" class="form-control" id="appointment_name">
+          </div>
+          <div class="form-group">
+            <label for="appointment_email" class="text-black">Email</label>
+            <input type="text" class="form-control" id="appointment_email">
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="appointment_date" class="text-black">Date</label>
+                <input type="text" class="form-control" id="appointment_date">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="appointment_time" class="text-black">Time</label>
+                <input type="text" class="form-control" id="appointment_time">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="appointment_message" class="text-black">Message</label>
+            <textarea name="" id="appointment_message" class="form-control" cols="30" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Send Message" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+
+    </div>
+    </div>
+    </div>
+
+    {% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+
+    <script src="{% static 'consumer_portal/js/jquery.min.js'%}"></script>
+    <script src="{% static 'consumer_portal/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/popper.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/aos.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static 'consumer_portal/js/scrollax.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'consumer_portal/js/google-map.js' %}"></script>
+
+    <script src="{% static 'consumer_portal/js/main.js' %}"></script>
+    {% endblock %}
+    {% block extrascript %}
+    <script>
+
+    </script>
+    {% endblock %}
+    </body>
+</html>

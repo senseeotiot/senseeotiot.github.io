@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load rest_framework %}
+{% load static %}
+{% load string_filters %}
+{% block title %}
+    SENSEEOT | Package Management
+{% endblock %}
+{% block content %}
+{% block extrastylesheet %}
+<style>
+
+</style>
+{% endblock %}
+<div role="tabpanel" aria-labelledby="users-tab">
+    {% if not account_detail is None and not account_detail.role == '0' %}
+        <a href="{% url 'create_package_mapping_management' %}"><button class="btn btn-md btn-primary font-weight-bold">
+            <span><i class="fas fa-plus-circle"></i></span>&nbsp; Add Mapping</button></a>
+        {% endif %}
+        <div class="row">
+            <div class="col-lg-12">
+                {% if package_mapping_details %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead style="background-image:linear-gradient(to right, #0062cc, #5372ff); color: white">
+                                    <tr>
+                                        <th class="font-weight-bold">package_genre</th>
+                                        <th class="font-weight-bold">package_list</th>
+                                        <th class="font-weight-bold">package_type</th>
+                                        <th class="font-weight-bold">description</th>
+                                        {% if not account_detail is None and not account_detail.role == '0' %}
+                                            <th class="font-weight-bold">Edit</th>
+                                            <th class="font-weight-bold">Delete</th>
+                                        {% endif %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                       {% for package_mapping_detail in package_mapping_details %}
+                                            <tr>
+                                                <td>{{ package_mapping_detail.package_genre }}</td>
+                                                <td>
+                                                    {% if package_mapping_detail.package_list.all %}
+                                                        {{ package_mapping_detail.package_list.all|queryset_to_string|string_slicing:', ' }}
+                                                        {% if package_mapping_detail.package_list.all|queryset_to_string != package_mapping_detail.package_list.all|queryset_to_string|string_slicing:',' %}
+                                                            <span class="text-muted" data-toggle="tooltip" data-placement="top" data-html="true" title="{{ package_mapping_detail.package_list.all|queryset_to_string }}" style="cursor: pointer">
+                                                                ...more
+                                                            </span>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        -
+                                                    {% endif %}
+                                                    {% comment %}{%  for  a in package_mapping_detail.package_list.all %}
+                                                        {{ a.name }} ,
+                                                    {% endfor %}{% endcomment %}
+                                                </td>
+                                                <td>{{ package_mapping_detail.package_type }}</td>
+                                                <td>
+                                                    {% if package_mapping_detail.description %}
+                                                        {{ package_mapping_detail.description|string_slicing }}
+                                                        {% if package_mapping_detail.description != package_mapping_detail.description|string_slicing %}
+                                                            <span class="text-muted" data-toggle="tooltip" data-placement="top" data-html="true" title="{{ package_mapping_detail.description }}" style="cursor: pointer">
+                                                                ...more
+                                                            </span>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        -
+                                                    {% endif %}
+                                                </td>
+
+
+                                                {% if not account_detail is None and not account_detail.role == '0' %}
+                                                    <td>
+                                                        <a href="{%  url 'edit_package_mapping_management' package_mapping_detail.pk %}">
+                                                            <button class="btn btn-sm btn-block" style="background-color: #EB5E20; color: #FFFFFF">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-block" data-toggle="modal" data-target="#channeldelete{{ package_mapping_detail.pk }}" style="background-color: #EB5E20; color: #FFFFFF">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                    <div class="modal fade right" id="channeldelete{{ package_mapping_detail.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 99999">
+                                                        <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+                                                        <div class="modal-dialog modal-side modal-top-right" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h6 class="modal-title w-100" id="myModalLabel">Are you sure want to delete {{ package_mapping_detail.package_genre }}?</h6>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="btn-group">
+                                                                        <a href="#" type="button" class="btn btn-md" data-dismiss="modal" style="color: #FFFFFF; background-color: #EB5E20"><b>Cancel</b></a>
+                                                                        &nbsp;&nbsp;&nbsp;
+                                                                        <form method="POST" action="{% url "delete_package_mapping_management" package_mapping_detail.pk%}?page={{ page }}">
+                                                                            {% csrf_token %}
+                                                                            <button type="submit" class="btn btn-md font-weight-bold" style="color: #FFFFFF; background-color: #00428a">Delete</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer col-lg-12">
+                            {% include 'paginator.html' %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning font-weight-bold text-uppercase my-1">
+                        No records found.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+{% endblock  %}

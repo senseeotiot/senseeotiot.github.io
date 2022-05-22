@@ -1,0 +1,454 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}SENSEEOT{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link href="static/img/Logo New-with-text.png" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    {% block stylesheet %}
+        <!-- Bootstrap CSS File -->
+        <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Libraries CSS Files -->
+{#        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">#}
+        {#      <link href="static/lib/animate/animate.min.css" rel="stylesheet">#}
+        <link rel="stylesheet" href="static/consumer_portal/css/flaticon.css">
+        <link rel="stylesheet" href="static/consumer_portal/css/icomoon.css">
+        <link href="static/bootstrap/css/ionicons.min.css" rel="stylesheet">
+        <link href="static/IOTHome/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="static/IOTHome/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet">
+        <link href="static/bootstrap/css/lightbox.min.css" rel="stylesheet">
+        <link href="static/bootstrap/css/animate.min.css" rel="stylesheet">
+
+        <!-- Main Stylesheet File -->
+        <link href="static/bootstrap/css/style.css" rel="stylesheet">
+
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <!-- Font Awesome -->
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/css/mdb.min.css" rel="stylesheet">
+
+        <style>
+            .img-fluid-remake {
+                max-width: 238px;
+                min-width: 75px;
+                min-height: 85px;
+            }
+            .font-large{
+                font-size: large;
+            }
+        </style>
+    {% endblock %}
+    {% block extrastylesheet %}
+        <link href="static/bootstrap/css/anime_style.css" rel="stylesheet">
+    {% endblock %}
+</head>
+
+<body>
+
+{% block iothome %}
+
+<!--==========================
+Header
+============================-->
+{% block header %}
+    <header id="header" class="fixed-top" {% comment %}style="min-height: 100px;"{% endcomment %}>
+        <div class="container">
+            <div class="logo float-left text-center">
+                <!-- Uncomment below if you prefer to use an image logo -->
+{#                <h1 class="text-light"><a href="IOTHome.html"><span>SENSEEOT</span></a></h1>#}
+                <a href="#intro" class="scrollto navbar-brand text-dark">
+                    <img class="img-fluid img-fluid-remake my-n3" src="static/img/scrinbanner.png" alt="">
+                </a>
+            </div>
+  <div class="logo float-left text-center">
+                <!-- Uncomment below if you prefer to use an image logo -->
+{#                <h1 class="text-light"><a href="IOTHome.html"><span>SENSEEOT</span></a></h1>#}
+                <a href="#intro" class="scrollto navbar-brand text-dark">
+                    <img class="img-fluid img-fluid-remake my-n3" src="static/img/scrinlogo.png" alt="">
+                </a>
+            </div>
+            <nav class="main-nav float-right d-none d-lg-block my-2">
+                <ul>
+                    {% url 'IoT_home' as IotHome %}
+                    <li {% if request.path == IotHome %}class="active"{% endif %}><a href="{% url 'IoT_home" style="font-size: 14px">Home</a></li>
+
+
+{#                    <li><a href="#News" style="font-size: 14px">News</a></li>#}
+                    {% url 'about-us' as AboutUs %}
+                    <li {% if request.path == AboutUs %}class="active"{% endif %}><a href="{% url 'about-us" style="font-size: 14px">About Us</a>
+                    </li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.senseeot.scrin" class="btn btn-primary btn-sm text-white font-weight-bold">OTT</a></li>
+                   
+
+                </ul>
+            </nav><!-- .main-nav -->
+
+        </div>
+    </header>
+{% endblock %}
+        <div class="container my-5"></div>
+{% block banner %}
+    <!--==========================
+    Intro Section
+  ============================-->
+
+    <!-- #intro -->
+<!--==========================
+    Intro Section
+  ============================-->
+       <section id="intro" class="clearfix">
+        <div class="intro-img my-n5">
+            <div style="background-image: url(static/img/ctv.jpg); background-size: cover;">
+            <div class="container row justify-content-center">
+                <div class="col-lg-12 my-5 text-white text-center">
+                    <h3 class="font-weight-bold"></h3>
+                </div>
+
+                <div class="col-lg-12 pb-5 text-center">
+                    <div class=" row justify-content-center">
+                        <div class="col-lg-2">
+                            <img src="static/img/home.png" alt="" class="img-fluid" style="min-width: 50px; max-width: 150px"/>
+                        </div>
+                     
+                        <div class="col-lg-5">
+                            <img src="static/img/scrinmulti.png" alt="" class="img-fluid" style="min-width: 150px; max-width: 350px; min-height: 250px; max-height: 450px"/>
+                        </div>
+                       
+                        <div class="col-lg-5">
+                            <img src="static/img/poster1.png" alt="" class="img-fluid" style="min-width: 250px; max-width: 600px"; min-height: 250px; max-height: 450px"/>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        </div>
+    </section>
+    <section id="intro" class="clearfix">
+
+    <div class="container row justify-content-center">
+    <div class="col-lg-5 my-5">
+   <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="560.7" height="315" type="text/html" src="https://www.youtube.com/embed/jLPwTmZE8q0?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"></iframe>
+    </div>
+    <div class="col-lg-2 my-2">
+    </div>
+    <div class="col-lg-5 my-5">
+    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="560.7" height="315" type="text/html" src="https://www.youtube.com/embed/EZaEXMO2sYw?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"></iframe>
+    </div>
+    </div>
+     
+   
+    </section>
+    <section id="intro" class="clearfix">
+        <div class="intro-img my-n5">
+            <div style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.7)), url(static/img/smart-home-solution-banner.jpg); background-size: cover;">
+            <div class="container row justify-content-center">
+                <div class="col-lg-12 my-5 text-white text-center">
+                    <h3 class="font-weight-bold">{"..": {"..":{"..":{}}}}</h3>
+                </div>
+
+                <div class="col-lg-12 pb-5 text-center">
+                    <div class=" row justify-content-center">
+                        <div class="col-lg-2 my-5">
+                            <img src="static/img/cloud.png" alt="" class="img-fluid" style="min-width: 50px; max-width: 200px"/>
+                        </div>
+                        <div class="col-lg-2 text-white-50">
+                            <div class="col-lg-12 my-5">
+                                <i class="fa fa-arrow-right fa-2x"></i>&nbsp;
+                                <i class="fa fa-arrow-right fa-2x"></i>&nbsp;
+                                <i class="fa fa-arrow-right fa-2x"></i>&nbsp;
+                            </div>
+                            <div class="col-lg-12">
+                                <i class="fa fa-arrow-left fa-2x"></i>&nbsp;
+                                <i class="fa fa-arrow-left fa-2x"></i>&nbsp;
+                                <i class="fa fa-arrow-left fa-2x"></i>&nbsp;
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <img src="static/img/mobile.png" alt="" class="img-fluid" style="min-width: 50px; max-width: 150px"/>
+                        </div>
+                        <div class=" col-lg-2 text-white-50 my-5 pt-4">
+                            <i class="fa fa-arrow-right fa-2x"></i>&nbsp;
+                            <i class="fa fa-arrow-right fa-2x"></i>&nbsp;
+                            <i class="fa fa-arrow-right fa-2x"></i>&nbsp;
+                        </div>
+                        <div class="col-lg-3">
+                            <img src="static/img/IoT-things.png" alt="" class="img-fluid" style="min-width: 50px; max-width: 400px"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- #intro -->
+
+{% endblock %}
+<!-- #header -->
+
+<!-- Side Modal Top Right -->
+
+<!-- To change the direction of the modal animation change .right class -->
+<div class="modal fade right" id="sideModalTR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 99999">
+    <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+    <div class="modal-dialog modal-side modal-top-right" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title w-100" id="myModalLabel"><b>Are you sure want to logout?</b></h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <a href="#" type="button" class="btn btn-md" data-dismiss="modal" style="color: #FFFFFF; background-color: #EB5E20"><b>Close</b></a>
+                <a href="{% url 'LogoutTemplate" type="button" class="btn btn-md" style="color: #FFFFFF; background-color: #00428a"><b>Logout</b></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Side Modal Top Right -->
+    {% block content %}
+        <main id="main" style="margin-top: 6rem">
+            <div class="my-5"></div>
+            <section id="platformandservices">
+                <div class="container">
+                    <div class="row justify-content-around">
+                        <div class="col-12">
+                            <h2 class="font-weight-bold text-center">Platform & Solution</h2>
+                            <p class="my-5 text-center">
+                                SENSEEOT Smart IoT Platform provides APIs and comprises of connectivity modules for Smart Light, Smart Switch, Smart Plug, IP Cameras to build a sensor network and seamlessly connect to the IoT, custom app development and the cloud services.
+                            </p>
+                        </div>
+
+                        <div class="card shadow my-3 row" style="width: 22rem;">
+                            <div class="col-12 card-body text-white" style="background: linear-gradient(to right,  #13A7D7 ,  #3170B0);{% comment %}background-image: url(static/img/connectivity.jpg); background-size: cover;{% endcomment %}">
+                                <h5 class="font-weight-bold text-center">Device SDK</h5>
+                                <p><small>SENSEEOT's device SDK comprises of connectivity stack and API References.</small></p>
+                            </div>
+                            <div class="col-12 card-body" style="color: rgba(19, 167, 215, .6); height: 10rem">
+                                <ul class="mx-n3">
+                                    <li><small class="font-weight-bold">Converged Services Gateway</small></li>
+                                    <li><small class="font-weight-bold">Any Smart Home Appliances</small></li>
+                                </ul>
+                            </div>
+                        </div>
+                    
+                        <div class="card shadow my-3 mx-2 row" style="width: 22rem">
+{#                            <img class="card-img-top" src="static/img/brain-with-Iot.jpg" alt="Card image cap">#}
+                            <div class="col-12 card-body text-white" style="background: linear-gradient(to right,  #13A7D7 ,  #3170B0);">
+                                    <h5 class="font-weight-bold text-center">SENSE-SMART Cloud</h5>
+                                    <p><small>Supports connected devices globally and can scale to million of users and trillions of devices.</small></p>
+                            </div>
+                            <div class="col-12 card-body" style="color: rgba(19, 167, 215, .6); height: 10rem">
+                                <ul class="mx-n3">
+                                    <li><small class="font-weight-bold">Government, Enterprise and R&D Lab Customers</small></li>
+                                    <li><small class="font-weight-bold">Analytics over Bigdata </small></li>
+                                    <li><small class="font-weight-bold">Block-chain Adaption</small></li>
+                                </ul>
+                            </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+            <section id="build-or-buy">
+                <div style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.7)), url(static/img/build-or-buy-banner.jpg); background-size: cover;">
+                    <div class="container row justify-content-center">
+                        <div class="col-lg-7 my-5 text-white">
+                            <h3 class="font-weight-bold">Build or Buy your device</h3><br>
+                            <p>
+                                SENSEEOT works with partner ODM/OEM eco-system so that one can choose to buy a retail node, gateway or sensor and plug them into SENSE-SMART platform. It also provides embedded systems engineering service for building custom hardware and platform.
+                            </p>
+                            <button class="btn btn-md btn-outline-light">Build device</button>
+                            <button class="btn btn-md btn-outline-light">Buy device</button>
+                        </div>
+                        <div class="col-lg-5 p-5 text-center d-none d-lg-block">
+                            <img src="static/img/Build_own.png" alt="" class="img-fluid" style="min-width: 600px"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="clients" class="section-bg">
+                <div class="container">
+
+                    <div class="section-header">
+                        <h3>Integration</h3>
+                    </div>
+
+                    <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+
+                     
+                           
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="client-logo">
+                                <img src="static/img/google.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="client-logo">
+                                <img src="static/img/amazon.jpg" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        <!--
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="client-logo">
+                                <img src="static/img/amlogic.jpg" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        -->
+
+
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="client-logo">
+                                <img src="static/img/espressif.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="client-logo">
+                                <img src="static/img/raspberry.jpg" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        <!--
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="client-logo">
+                                <img src="static/img/mediatek.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="client-logo">
+                                <img src="static/img/amazon.jpg" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="client-logo">
+                                <img src="static/img/google.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                    -->
+                    </div>
+                </div>
+            </section>
+            <section id="request">
+                    <div style="background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.2)), url(static/img/request_banner.jpg); background-size: cover; background-repeat: no-repeat; height: 15rem;">
+                    <div class="p-5 text-white">
+                        <h3 class="font-weight-bold">Plan and Execute Your IoT Journey</h3>
+                        {#                  <button class="lead text-center font-weight-bold"></button>#}
+                        <button class="btn btn-outline-light">Explore</button>
+                    </div>
+                </div>
+            </section>
+    </main>
+    {% endblock %}
+{% block footer %}
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 footer-info">
+                        <h4>Corporate Address</h4>
+                        <p>Electronic City,
+                            Bangalore- 562106,
+                            Karnataka, India</p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 footer-info">
+                        <h4>CONTACT</h4>
+
+                        <p>Sales Inquiries</p>
+                        <p><i class="fas fa-envelope"></i>&nbsp;&nbsp;admin@senseeot.com</p>
+                        <hr>
+                        <p>Investor Inquiries</p>
+                        <p><i class="fas fa-envelope"></i>&nbsp;&nbsp;admin@senseeot.com</p>
+                        <hr>
+                        <p>Media Inquiries</p>
+                        <p><i class="fas fa-envelope"></i>&nbsp;&nbsp;admin@senseeot.com</p>
+                        <hr>
+
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 footer-info">
+                        <h4>FOLLOW US</h4>
+                        <div class="social-links">
+                            <a href="#"><span class="icon-twitter"></span></a></a>
+{#                            <a href="#" class="twitter"><i class="fas fa-twitter"></i></a>#}
+                            <a href="#" class="facebook"><i class="icon-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="icon-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="icon-google-plus"></i></a>
+                            <a href="#" class="linkedin"><i class="icon-linkedin"></i></a>
+                        </div>
+
+                          <a href="{% url 'privacy'  %}"><font  size="4" color="white"> privacy </font></a>  
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+        <div class="copyright">
+            &copy; Copyright <strong>Senseeot-<script>document.write(new Date().getFullYear());</script></strong>. All Rights Reserved
+
+        </div>
+        </div>
+    </footer>
+{% endblock %}
+
+
+{% endblock %}
+
+
+
+<a href="#" class="back-to-top aqua-gradient"><i class="fa fa-chevron-up"></i></a>
+<!-- Uncomment below i you want to use a preloader -->
+<!-- <div id="preloader"></div> -->
+
+
+
+
+<!-- JavaScript Libraries -->
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
+
+
+<script src="static/bootstrap/js/jquery.min.js"></script>
+<script src="static/bootstrap/js/jquery-migrate.min.js"></script>
+<script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/bootstrap/js/easing.min.js"></script>
+<script src="static/bootstrap/js/mobile-nav.js"></script>
+<script src="static/bootstrap/js/waypoints.min.js"></script>
+<script src="static/bootstrap/js/wow.min.js"></script>
+<script src="static/bootstrap/js/counterup.min.js"></script>
+<script src="static/IOTHome/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+<script src="static/bootstrap/js/isotope.pkgd.min.js"></script>
+<script src="static/bootstrap/js/lightbox.min.js"></script>
+<!-- Contact Form JavaScript File -->
+<script src="static/bootstrap/js/contactform.js"></script>
+
+<!-- Template Main Javascript File -->
+<script src="static/bootstrap/js/main.js"></script>
+<script>
+    $('.href-active').removeAttr('href');
+</script>
+{% block script %}
+
+{% endblock  %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load rest_framework %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <form method="post">
+            {% csrf_token %}
+                {% include 'serializer_form.html' %}
+                <button type="submit" class="btn btn-block btn-danger font-weight-bold">Add</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

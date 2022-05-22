@@ -1,0 +1,283 @@
+{% extends 'ConsumerPortal/index.html' %}
+{% load static %}
+{% load consumer_portal_filters %}
+
+<!-- Block TITLE -->
+
+{% block title %}
+    Packs
+{% endblock %}
+
+<!-- END block TITLE-->
+
+<!-- Block EXTRA STYLE SHEET -->
+
+{% block extrastylesheet %}
+    <style>
+        .arrow-down {
+            width: 100%;
+            {#height: 50px;#}
+            position: relative;
+        }
+
+        .arrow-down.active {
+
+        }
+
+        .arrow-down:before, .arrow-down:after {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 2px;
+            background: #EB5E20;
+            position: absolute;
+            top: 20px;
+            transition: transform .5s;
+        }
+
+        .arrow-down:before {
+            right: 21px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            transform: rotate(45deg);
+        }
+
+        .arrow-down:after {
+            right: 15px;
+            transform: rotate(-45deg);
+        }
+
+        .arrow-down.active:before  {
+            transform: rotate(-45deg);
+        }
+
+        .arrow-down.active:after {
+            transform: rotate(45deg);
+        }
+    </style>
+{% endblock %}
+
+<!-- END block EXTRA STYLE SHEET-->
+
+<!-- END block BANNER-->
+{% block banner %}
+
+{% endblock %}
+<!-- END block BANNER-->
+
+
+<!-- Block CONTENT -->
+
+{% block content %}
+<h1 class="display-details-on-mobile" style="background: linear-gradient(to right, #fff, #eb8954 ,#EB5E20)">&nbsp;</h1>
+    <div class="row justify-content-center">
+        <div class="col-1"></div>
+        <div class="col-10">
+            {% comment %}<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-dish" role="tabpanel" aria-labelledby="nav-dish-tab">
+                    <h2>[ DISH ] Current selected content's description comes here...</h2>
+                </div>
+                <div class="tab-pane fade" id="nav-broadcast" role="tabpanel" aria-labelledby="nav-broadcast-tab">
+                    <h2>[ BROADCAST ]Current selected content's description comes here...</h2>
+                </div>
+                <div class="tab-pane fade" id="nav-channel" role="tabpanel" aria-labelledby="nav-channel-tab">
+                    <h2>[ CHANNEL ]Current selected content's description comes here...</h2>
+                </div>
+            </div>{% endcomment %}
+            <h2>Current selected content's description comes here...</h2>
+            <nav class="nav-pills">
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link {% url 'consumer_portal:dish_packs' as current_url1 %} {% if request.path == current_url1 %} active {% endif %}" id="nav-dish-tab" data-toggle="tab" href="#nav-dish" role="tab" aria-controls="nav-dish" aria-selected="true">Dish recommended</a>
+                    <a class="nav-item nav-link {% url 'consumer_portal:broadcast_packs' as current_url1 %} {% if request.path == current_url1 %} active {% endif %}" id="nav-broadcast-tab" data-toggle="tab" href="#nav-broadcast" role="tab" aria-controls="nav-broadcast" aria-selected="false">Broadcaster</a>
+                    <a class="nav-item nav-link {% url 'consumer_portal:channel_packs' as current_url1 %} {% if request.path == current_url1 %} active {% endif %}" id="nav-channel-tab" data-toggle="tab" href="#nav-channel" role="tab" aria-controls="nav-channel" aria-selected="false">Channels</a>
+                </div>
+            </nav>
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade {% url 'consumer_portal:dish_packs' as current_url1 %} {% if request.path == current_url1 %} show active {% endif %}" id="nav-dish" role="tabpanel" aria-labelledby="nav-dish-tab">
+                    <div id="accordion">
+                        <div class="card border-0">
+                            {% for i in mapped_pack|filter_by_genre:'DISH' %}
+                                <div class="card-header border-0 bg-white" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <a class="text-decoration-none" data-toggle="collapse" data-target="#collapseOne{{ i.id }}" aria-expanded="true" aria-controls="collapseOne">
+                                            <h6 class="arrow-down" onclick="arrow_down_toggler(event, '{{ i.id }}', 1)">{{ i.package_genre|lower|capfirst}}</h6><hr>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne{{ i.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="container">
+                                        <div class="card-body row justify-content-start">
+                                            {% for j in i.package_list.all %}
+                                                <div class="card shadow col-sm-2 col-md-2 col-lg-2 mx-1 my-2 card-width-on-mobile" style="min-width: 24%;">
+                                                    <div class="card-body text-center">
+                                                        <div id="packageName" class="font-weight-bold dish-text-color">{{ j.name }}</div>
+                                                        <div id="packageChannels">{{ j.channel.all|length}} Channels & Services</div>
+                                                        <div id="packagePrice" class="dish-text-color-gradient">&#8377;&nbsp;{{ j.price }} / month</div>
+                                                        <hr>
+                                                        <div id="packageHref" class="text-center "><a href="{% url 'consumer_portal:dish_pack_details' j.id %}">View details</a></div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade {% url 'consumer_portal:broadcast_packs' as current_url1 %} {% if request.path == current_url1 %} show active {% endif %}" id="nav-broadcast" role="tabpanel" aria-labelledby="nav-broadcast-tab">
+                    <div id="accordion">
+                        <div class="card border-0">
+                            {%for i in mapped_pack|filter_by_genre:'Broadcaster' %}
+                                <div class="card-header border-0 bg-white" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <a class="text-decoration-none" data-toggle="collapse" data-target="#collapseTwo{{ i.id }}" aria-expanded="true" aria-controls="collapseTwo">
+                                            <h6 class="arrow-down" onclick="arrow_down_toggler(event, '{{ i.id }}', 2)">{{ i.package_genre|lower|capfirst}}</h6><hr>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo{{ i.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="container">
+                                        <div class="card-body row justify-content-start">
+                                            {% for j in i.package_list.all %}
+                                                <div class="card shadow col-sm-2 col-md-2 col-lg-2 mx-1 my-2" style="min-width: 24%; min-height: 110%">
+                                                    <div class="card-body text-center">
+                                                        <div id="packageName" class="font-weight-bold dish-text-color">{{ j.name }}</div>
+                                                        <div id="packageChannels">{{ j.channel.all|length}} Channels & Services</div>
+                                                        <div id="packagePrice" class="dish-text-color-gradient">&#8377;&nbsp;{{ j.price }} / month</div>
+                                                        <hr>
+                                                        <div id="packageHref" class="text-center "><a href="{% url 'consumer_portal:dish_pack_details' j.id %}">View details</a></div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade {% url 'consumer_portal:channel_packs' as current_url1 %} {% if request.path == current_url1 %} show active {% endif %}" id="nav-channel" role="tabpanel" aria-labelledby="nav-channel-tab">
+                    <div id="accordion">
+                        <div class="card border-0">
+                            {% for i in  channels|group_by_channelgenre_from_channels %}
+                                <div class="card-header border-0 bg-white" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <a class="text-decoration-none" data-toggle="collapse" data-target="#collapseThree{{ forloop.counter }}" aria-expanded="true" aria-controls="collapseThree">
+                                            <h6 class="arrow-down" onclick="arrow_down_toggler(event, '{{ i.id }}', 3)">{{ i.genre_name|lower|capfirst }}</h6><hr>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree{{forloop.counter}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="container">
+                                        <div class="card-body row justify-content-start">
+                                            {% for logo, name, price in i.zippedlogosANDnamesANDprice %}
+                                                <div class="card shadow col-sm-2 col-md-2 col-lg-2 mx-1 my-2" style="min-width: 24%; min-height: 110%">
+                                                    <div class="card-body text-center">
+                                                        <div id="packageName" class="font-weight-bold dish-text-color">{{ name }}</div>
+                                                        <div id="packageChannels"><img src="{{ logo }}" alt="img" class="img-fluid"></div>
+                                                        <div id="packagePrice" class="dish-text-color-gradient text-left my-3">&#8377;&nbsp;{{ price }} / month</div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% comment %}<div class="card border-0">
+                        {% for i in  channels|group_by_channelgenre_from_channels %}
+                            <div class="card-header border-0 bg-white" id="headingOne">
+                                <h6>{{ i.genre_name|lower|capfirst }}</h6><hr>
+                            </div>
+                            <div class="container">
+                                <div class="card-body row justify-content-start">
+                                    {% for logo, name, price in i.zippedlogosANDnamesANDprice %}
+                                        <div class="card shadow col-sm-2 col-md-2 col-lg-2 mx-1 my-2" style="min-width: 24%;">
+                                            <div class="card-body text-center">
+                                                <div>{{ name }}</div>
+                                                <div><img src="{{ logo }}" alt="img" class="img-fluid"></div>
+                                                <div>{{ price }}</div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>{% endcomment %}
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+{% endblock %}
+<!-- END block CONTENT-->
+
+
+<!-- Block EXTRA SCRIPT -->
+
+{% block extrascript %}
+    <script>
+            function hasClass(el, className) {
+                if (el.classList)
+                    return el.classList.contains(className);
+                else
+                    return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+            }
+            function addClass(el, className) {
+                if (el.classList)
+                    el.classList.add(className);
+                else if (!hasClass(el, className)) el.className += " " + className
+            }
+
+            function removeClass(el, className) {
+                if (el.classList)
+                    el.classList.remove(className);
+                else if (hasClass(el, className)) {
+                    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+                    el.className=el.className.replace(reg, ' ')
+                }
+            }
+        function arrow_down_toggler(e, id, position){
+            let collapseOne_ID = document.getElementById('collapseOne'+ id);
+            let collapseTwo_ID = document.getElementById('collapseTwo'+ id);
+            let collapseThree_ID = document.getElementById('collapseThree'+ id);
+            if (position === 1)
+            {
+                if (hasClass(collapseOne_ID, 'show') && hasClass(collapseOne_ID, 'collapse')){
+                    removeClass(e.target, 'active');
+                }
+                else if(!hasClass(collapseOne_ID, 'show')){
+                    addClass(e.target, 'active');
+                }
+            }else if(position === 2){
+                if (hasClass(collapseTwo_ID, 'show') && hasClass(collapseTwo_ID, 'collapse')){
+                    removeClass(e.target, 'active');
+                }
+                else{
+                    addClass(e.target, 'active');
+                }
+            }else if(position === 3){
+                if (hasClass(collapseThree_ID, 'show') && hasClass(collapseThree_ID, 'collapse')){
+                    removeClass(e.target, 'active');
+                }
+                else{
+                    addClass(e.target, 'active');
+                }
+            }
+
+        }
+
+        $(document).on('show','.accordion', function (e) {
+            //$('.accordion-heading i').toggleClass(' ');
+            $(e.target).prev('.accordion-heading').addClass('accordion-opened');
+        });
+
+        $(document).on('hide','.accordion', function (e) {
+            $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
+            //$('.accordion-heading i').toggleClass('fa-chevron-right fa-chevron-down');
+        });
+    </script>
+{% endblock %}
+<!-- END block EXTRA SCRIPT-->

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load rest_framework %}
+{% load static %}
+{% block title %}
+    SENSEEOT | {{ user.username | capfirst }}'s Profile
+{% endblock %}
+{% block content %}
+{#    {% get_permissions obj %}#}
+
+
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="card col-lg-4">
+           {% comment %} <div class="card-header text-center" style="cursor: pointer; background-image:linear-gradient(to right, #EB5E20, #ff8c2b)">
+                <i class="fas fa-user-circle fa-fw fa-4x" style="color: #FFFFFF"></i><br>
+                <h5 class="font-weight-bold" style="color: #FFFFFF">{{ user.username }}</h5>
+                <h6 class="font-weight-bold" style="color: #FFFFFF">Joined  - {{ user.date_joined }}</h6>
+            </div>{% endcomment %}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 text-center pb-2 pt-2" style="background-image:linear-gradient(to right, #EB5E20, #ff8c2b)">
+{#                            <div style="background-color: rgba(70,69,71,0.82); border-radius: 50%; width: 200px; height: 200px; border: 10px solid rgba(38,37,39,0.82);">#}
+                            <img src="{% static 'img/steve2.png' %}" style="width: 120px" alt="img"/>
+                        </div>
+{#                            style="background-image: linear-gradient(to right,#EB5E20, #ff8c2b);"#}
+{#                             <img src="{% static 'img/b.png' %}" alt="-" style="width: 200px;border-radius: 50%;">#}
+                    <div class="col-lg-12">
+                        <span class="font-weight-bold" style="color: #525252; font-size: 30px">{{ user.first_name }} {{ user.last_name }}</span>&nbsp;&nbsp;<a href="{% url 'update_user_profile' account.pk %}"><i class="fas fa-pen text-muted"></i></a>
+                        <br>
+                        <span><i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;{{ user.email }}</span><br>
+                        <span><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ account.phone }}</span><br>
+                        <span><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{ account.street_address1 }}, {{ account.street_address2 }},</span><br>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ account.city }}, {{ account.state }} - {{ account.pincode }}.</span>
+                    </div>
+                </div>
+            </div>
+
+{#                    <h1 class="font-weight-bold" style="color: #525252">{{ user.username }}</h1>#}
+        </div>
+
+            {% comment %}<div class="card-footer">
+                {% if user.is_active %}
+                    <a href="{% url 'update_user_profile' account.pk %}"><button class="btn btn-block font-weight-bold" style="color: white; background-image:linear-gradient(to right, #EB5E20, #ff8c2b)">Edit</button></a>
+                {% endif %}
+            </div>{% endcomment %}
+
+        <div class="col-lg-4"></div>
+
+    </div>
+{% endblock %}

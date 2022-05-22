@@ -1,0 +1,42 @@
+{% extends 'ConsumerPortal/index.html' %}
+{% load rest_framework %}
+{% load static %}
+{% block title %}
+     Register Success
+{% endblock %}
+{% block extrastylesheet %}
+    <style>
+
+    </style>
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block banner %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center logo my-4">
+              <a href="{% url 'home' %}"><img class="logo-responsive" src="{% static 'img/Logo New-with-text.png' %}" width="20%" alt="dish-tv-logo"></a>
+        </h1>
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <div class="alert alert-success font-weight-bold" role="alert" style="text-align: center">Registration Success</div>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <a class="btn btn-primary btn-block" href="{% url 'consumer_portal:login' %}">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
